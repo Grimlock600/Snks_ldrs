@@ -1,0 +1,61 @@
+class Dice:
+    def roll(self):
+        self.x=random.randint(1, 6)
+        return self.x
+
+
+Snk_map = {
+    94: 80,
+    90: 85,
+    83: 67,
+    77: 46,
+    65: 33,
+    43: 13,
+    27: 15,
+    35: 7,
+    99: 18,
+    16: 3,
+    10: 4,
+    22: 2,
+}
+
+Dice1 = Dice()
+PLAYER1_POS = 1
+PLAYER2_POS = 1
+
+for i in range(1, 1000):
+    if i % 2 != 0:
+        z = input("Player 1 to roll dice enter 'X' ")
+        if z == 'X':
+            i = Dice1.roll()
+            print(f"PLAYER 1 HAS ROLLED {i}")
+            PLAYER1_POS = PLAYER1_POS+i
+            if PLAYER1_POS > 100:
+                PLAYER1_POS = PLAYER1_POS-i
+                print(f"PLAYER 1 IS STILL AT POSITION {PLAYER1_POS}")
+                continue
+            print(f"PLAYER 1 IS AT POSITION {PLAYER1_POS}")
+            if PLAYER1_POS != Snk_map.get(PLAYER1_POS, PLAYER1_POS):
+                PLAYER1_POS = Snk_map.get(PLAYER1_POS)
+                print(f"PLAYER 1 HAS BEEN BITTEN BY SNAKE AND MOVED TO POSITION {PLAYER1_POS}")
+            if PLAYER1_POS == 100:
+                print("PLAYER_1 has won")
+                break
+    else:
+        z = input("Player 2 to roll dice enter 'X' ")
+        if z == 'X':
+            i = Dice1.roll()
+            print(f"PLAYER 2 HAS ROLLED {i}")
+            PLAYER2_POS = PLAYER2_POS + i
+            if PLAYER2_POS > 100:
+                PLAYER2_POS = PLAYER2_POS - i
+                print(f"PLAYER 2 IS STILL AT POSITION {PLAYER2_POS}")
+                continue
+            print(f"PLAYER 2 IS AT POSITION {PLAYER2_POS}")
+            if PLAYER2_POS != Snk_map.get(PLAYER2_POS, PLAYER2_POS):
+                PLAYER2_POS = Snk_map.get(PLAYER2_POS)
+                print(f"PLAYER 2 HAS BEEN BITTEN BY SNAKE AND MOVED TO POSITION {PLAYER2_POS}")
+            if PLAYER2_POS == 100:
+                print("PLAYER_2 has won")
+                break
+
